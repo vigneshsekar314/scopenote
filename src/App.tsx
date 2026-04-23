@@ -1,6 +1,6 @@
 import { createSignal, type Component } from 'solid-js';
-import { AddNote } from './components/AddNote';
-import { NotePane } from './components/NotePane';
+import { AddNote } from './components/notes/AddNote';
+import { NotePane } from './components/notes/NotePane';
 import type { NoteListType } from './note.type';
 
 const App: Component = () => {

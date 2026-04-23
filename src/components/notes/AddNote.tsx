@@ -1,40 +1,13 @@
-import { createSignal } from "solid-js";
 import { NoteListType } from "../../note.type";
+import { useNote } from "./useAddNote";
 
 interface AddNoteProps {
   addNote: (newNote: NoteListType) => void;
 }
 export function AddNote(props: AddNoteProps) {
-  const [newNoteDesc, setNewNoteDesc] = createSignal("");
-  const [newNoteTitle, setNewNoteTitle] = createSignal("");
-  const [newNoteTag, setNewNoteTag] = createSignal("");
-  const handleNoteAdd = (e: MouseEvent) => {
-    e.preventDefault();
-    if (!newNoteTitle()) { return; }
-    const tagList = newNoteTag() ? newNoteTag().split(',') : [];
-    props.addNote(
-      {
-        id: crypto.randomUUID(),
-        title: newNoteTitle(),
-        desc: newNoteDesc(),
-        tags: tagList,
-        createdAt: Date.now().toString(),
-        updatedAt: Date.now().toString()
-      }
-    );
-    setNewNoteTitle("");
-    setNewNoteDesc("");
-    setNewNoteTag("");
-  };
-  const handleDiscard = (e: MouseEvent) => {
-    e.preventDefault();
-    setNewNoteTitle("");
-    setNewNoteDesc("");
-    setNewNoteTag("");
-  };
+  const { newNoteTitle, newNoteDesc, newNoteTag, setNewNoteTitle, setNewNoteDesc, setNewNoteTag, handleNoteAdd, handleDiscard } = useNote(props.addNote);
   const inputStyle = "min-w-20 border-1 border-grey-400 max-w-lg min-h-20 max-h-50 self-center";
   const textStyle = "border max-h-7 self-center";
-
   const labelStyle = "m-2 p-2 self-center min-w-50";
 
   return (

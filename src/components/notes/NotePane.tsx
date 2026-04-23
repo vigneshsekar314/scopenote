@@ -1,6 +1,6 @@
 import { For, Accessor } from "solid-js";
 import { NoteListType } from "../../note.type";
-import { NoteCard } from "../NoteCardteCard";
+import { NoteCard } from "../notes/NoteCard";
 
 interface NotePaneProps {
   noteList: Accessor<NoteListType[]>;
