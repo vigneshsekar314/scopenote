@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-light-red: oklch(70.4% 0.191 22.216);
+  --color-positive-lime: oklch(84.1% 0.238 128.85);
+}
