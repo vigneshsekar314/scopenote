@@ -1,5 +1,5 @@
 import { createSignal } from "solid-js";
-import { NoteListType } from "../../note.type";
+import { NoteListType } from "../note.type";
 
 interface AddNoteProps {
   addNote: (newNote: NoteListType) => void;
