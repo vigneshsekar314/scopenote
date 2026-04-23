@@ -11,7 +11,7 @@ export function AddNote(props: AddNoteProps) {
   const handleNoteAdd = (e: MouseEvent) => {
     e.preventDefault();
     if (!newNoteTitle()) { return; }
-    props.addNote({ title: newNoteTitle(), desc: newNoteDesc(), tags: [newNoteTag()], createdAt: "", updatedAt: "" }); // TODO: reframe logic for tags, createdAt and updatedAt
+    props.addNote({ id: crypto.randomUUID(), title: newNoteTitle(), desc: newNoteDesc(), tags: [newNoteTag()], createdAt: "", updatedAt: "" }); // TODO: reframe logic for tags, createdAt and updatedAt
     setNewNoteTitle("");
     setNewNoteDesc("");
     setNewNoteTag("");
@@ -22,8 +22,8 @@ export function AddNote(props: AddNoteProps) {
     setNewNoteDesc("");
     setNewNoteTag("");
   };
-  const inputStyle = "min-w-20 border-1 border-grey-400 max-w-lg min-h-20 max-h-50";
-  const textStyle = "border";
+  const inputStyle = "min-w-20 border-1 border-grey-400 max-w-lg min-h-20 max-h-50 self-center";
+  const textStyle = "border max-h-7 self-center";
 
   const labelStyle = "m-2 p-2 self-center min-w-50";
 
@@ -50,7 +50,7 @@ export function AddNote(props: AddNoteProps) {
           </div>
           <div class="flex flex-row">
             <label for="newNoteTag" class={labelStyle}>Tags</label>
-            <input id="newNoteTag" class={inputStyle}
+            <input id="newNoteTag" class={textStyle}
               value={newNoteTag()}
               onChange={(e) => setNewNoteTag(e.target.value)}
             />
