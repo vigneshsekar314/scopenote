@@ -1,32 +1,73 @@
 import { createSignal } from "solid-js";
+import { NoteListType } from "../note.type";
 
 interface AddNoteProps {
-  addNote: (newNote: string) => void;
+  addNote: (newNote: NoteListType) => void;
 }
 export function AddNote(props: AddNoteProps) {
-  const [newNote, setNewNote] = createSignal("");
-  const handleNoteChange = (noteText: string) => setNewNote(noteText);
-  const handleNoteAdd = () => {
-    props.addNote(newNote());
-    setNewNote("");
+  const [newNoteDesc, setNewNoteDesc] = createSignal("");
+  const [newNoteTitle, setNewNoteTitle] = createSignal("");
+  const [newNoteTag, setNewNoteTag] = createSignal("");
+  const handleNoteAdd = (e: MouseEvent) => {
+    e.preventDefault();
+    if (!newNoteTitle()) { return; }
+    props.addNote({ title: newNoteTitle(), desc: newNoteDesc(), tags: [newNoteTag()], createdAt: "", updatedAt: "" }); // TODO: reframe logic for tags, createdAt and updatedAt
+    setNewNoteTitle("");
+    setNewNoteDesc("");
+    setNewNoteTag("");
   };
+  const handleDiscard = (e: MouseEvent) => {
+    e.preventDefault();
+    setNewNoteTitle("");
+    setNewNoteDesc("");
+    setNewNoteTag("");
+  };
+  const inputStyle = "min-w-20 border-1 border-grey-400 max-w-lg min-h-20 max-h-50";
+  const textStyle = "border";
+
+  const labelStyle = "m-2 p-2 self-center min-w-50";
+
   return (
-    <>
+    <div>
       <div>
-        <textarea class="m-2 p-2 border-1 border-grey-400 min-w-20 max-w-lg min-h-20 max-h-50"
-          value={newNote()}
-          onChange={(e) => handleNoteChange(e.target.value)}
-        />
+        <strong class="m-2 p-2">Add Note</strong>
       </div>
-      <div class="flex gap-1">
-        <button class="p-2 m-2 bg-green-400 rounded-sm"
-          onClick={(_) => handleNoteAdd()}
-        >
-          Save
-        </button>
-        <button class="p-2 m-2 bg-red-400 rounded-sm">
-          Discard
-        </button>
-      </div >
-    </>);
+      <form>
+        <div class="flex flex-col gap-2 pt-5">
+          <div class="flex flex-row">
+            <label for="newNoteTitle" class={labelStyle}>Title</label>
+            <input id="newNoteTitle" class={textStyle}
+              value={newNoteTitle()}
+              onChange={(e) => setNewNoteTitle(e.target.value)}
+            />
+          </div>
+          <div class="flex flex-row">
+            <label for="newNoteDesc" class={labelStyle}>Description</label>
+            <textarea id="newNoteDesc" class={inputStyle}
+              value={newNoteDesc()}
+              onChange={(e) => setNewNoteDesc(e.target.value)}
+            />
+          </div>
+          <div class="flex flex-row">
+            <label for="newNoteTag" class={labelStyle}>Tags</label>
+            <input id="newNoteTag" class={inputStyle}
+              value={newNoteTag()}
+              onChange={(e) => setNewNoteTag(e.target.value)}
+            />
+          </div>
+        </div>
+        <div class="flex gap-1">
+          <button class="p-2 m-2 bg-green-400 rounded-sm"
+            type="submit"
+            onClick={(e) => handleNoteAdd(e)}
+          >
+            Save
+          </button>
+          <button class="p-2 m-2 bg-red-400 rounded-sm"
+            onClick={handleDiscard}>
+            Discard
+          </button>
+        </div >
+      </form>
+    </div>);
 }
