@@ -1,6 +1,6 @@
-import { For, Accessor } from "solid-js";
-import { NoteListType } from "../../note.type";
-import { NoteCard } from "../notes/NoteCard";
+import { For, Accessor } from 'solid-js';
+import { NoteListType } from '../../note.type';
+import { NoteCard } from '../notes/NoteCard';
 
 interface NotePaneProps {
   noteList: Accessor<NoteListType[]>;
@@ -11,9 +11,7 @@ export function NotePane(props: NotePaneProps) {
   return (
     <div class="flex flex-col flex-wrap gap-1">
       <For each={noteCollection()}>
-        {(note: NoteListType) => <NoteCard
-          noteItem={note}
-          removeNote={props.removeNote} />}
+        {(note: NoteListType) => <NoteCard noteItem={note} removeNote={props.removeNote} />}
       </For>
     </div>
   );

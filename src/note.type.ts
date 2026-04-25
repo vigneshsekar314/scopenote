@@ -1,4 +1,3 @@
-
 export interface NoteListType {
   id: string;
   title: string;
