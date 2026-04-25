@@ -10,7 +10,7 @@ export function NoteCard(props: NoteCardProps) {
   const labelStyle = 'w-50';
   const note = () => props.noteItem;
   const trim20 = (text: string) => showEllipsis(text, 20);
-  const removeNoteItem = (_: MouseEvent) => props.removeNote(note().id);
+  const removeNoteItem = () => props.removeNote(note().id);
 
   return (
     <div class="m-2 p-2 bg-gray-200 min-w-20 max-w-150 flex flex-row gap-x-5">

@@ -5,6 +5,7 @@ interface AddNoteProps {
   addNote: (newNote: NoteListType) => void;
 }
 export function AddNote(props: AddNoteProps) {
+  const addNoteProps = () => props.addNote;
   const {
     newNoteTitle,
     newNoteDesc,
@@ -14,7 +15,7 @@ export function AddNote(props: AddNoteProps) {
     setNewNoteTag,
     handleNoteAdd,
     handleDiscard,
-  } = useNote(props.addNote);
+  } = useNote(addNoteProps());
   const inputStyle = 'min-w-20 border-1 border-grey-400 max-w-lg min-h-20 max-h-50 self-center';
   const textStyle = 'border max-h-7 self-center';
   const labelStyle = 'm-2 p-2 self-center min-w-50';
